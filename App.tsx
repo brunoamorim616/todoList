@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from "expo-font";
+import { Home } from "./src/views/Home";
+
+import { StatusBar } from "react-native";
+
+import { hideAsync, preventAutoHideAsync } from "expo-splash-screen";
+import { useCallback } from "react";
+
+preventAutoHideAsync();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "Inter-Bold": require("./assets/fonts/Inter-Bold.ttf"),
+    "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar
+        translucent={true}
+        barStyle="light-content"
+        backgroundColor="transparent"
+      />
+      <Home onLayout={onLayoutRootView} />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
