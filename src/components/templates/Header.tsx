@@ -1,12 +1,12 @@
-import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import React from 'react';
+import { Image, StyleSheet, View } from 'react-native';
 
 export function Header() {
   return (
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../../assets/logo.png")}
+        source={require('../../../assets/logo.png')}
       />
     </View>
   );
@@ -15,7 +15,7 @@ export function Header() {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 34,
-    alignItems: "center",
+    alignItems: 'center',
   },
   image: {
     width: 128,

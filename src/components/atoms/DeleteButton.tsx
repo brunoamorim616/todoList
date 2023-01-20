@@ -1,16 +1,40 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { theme } from "../../themes/default";
+import Ionicon from '@expo/vector-icons/Ionicons';
+import React, { useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { theme } from '../../themes/default';
 
 interface ButtonProps {
-  type: "add" | "remove";
   onPress: () => void;
 }
 
-export function DeleteButton({ type, onPress }: ButtonProps) {
+export function DeleteButton({ onPress }: ButtonProps) {
+  const [iconColor, setIconColor] = useState<string>(theme.colors.gray300);
+  const [iconBackgroundColor, setIconBackgroundColor] = useState<string>(
+    theme.colors.transparent
+  );
+  function onPressIn() {
+    setIconBackgroundColor(theme.colors.gray400);
+    setIconColor(theme.colors.danger);
+  }
+
+  function onPressOut() {
+    setIconBackgroundColor(theme.colors.transparent);
+    setIconColor(theme.colors.gray300);
+  }
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-      <Text style={styles.buttonTitle}>+</Text>
+    <TouchableOpacity
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      onPress={onPress}
+      style={styles.buttonContainer}
+    >
+      <View
+        style={[styles.iconContainer, { backgroundColor: iconBackgroundColor }]}
+      >
+        <Ionicon name='trash-outline' size={21} color={iconColor} />
+      </View>
     </TouchableOpacity>
   );
 }
@@ -19,14 +43,14 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 52,
     height: 52,
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: theme.colors.blueDark,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  buttonTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: theme.colors.gray100,
+  iconContainer: {
+    width: 38,
+    height: 38,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

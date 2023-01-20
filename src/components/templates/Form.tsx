@@ -1,36 +1,35 @@
-import React, { useState } from "react";
-import { Alert, StyleSheet, TextInput, View } from "react-native";
-import { Todo } from "../../@types/Participants";
-import { theme } from "../../themes/default";
-import { AddButton } from "../atoms/AddButton";
+import React, { useState } from 'react';
+import { Alert, StyleSheet, TextInput, View } from 'react-native';
 
-interface FormProps {
-  handleSetNewTodo: (todo: Todo) => void;
-}
+import { useTodosService } from '../../hooks/useTodosService';
+import { theme } from '../../themes/default';
+import { AddButton } from '../atoms/AddButton';
 
-export function Form({ handleSetNewTodo }: FormProps) {
-  const [newTodo, setNewTodo] = useState<string>("");
+export function Form() {
+  const [newTodo, setNewTodo] = useState<string>('');
   const [inputIsFocused, setInputIsFocused] = useState<boolean>(false);
 
+  const { handleSetNewTodo } = useTodosService();
+
   function createNewTodo(todoDescription: string) {
-    let todo: Todo;
-    let id = Math.random().toString(36);
-    todo = { id, description: todoDescription };
+    const id = Math.random().toString(36);
+    const todo = { id, description: todoDescription, checked: false };
     return todo;
   }
 
   function addNewTodo() {
-    if (newTodo.trim() === "")
+    if (newTodo.trim() === '')
       return Alert.alert(
-        "Você precisa informar uma descrição para a nova tarefa."
+        'Você precisa informar uma descrição para a nova tarefa.'
       );
     const todo = createNewTodo(newTodo);
+
     handleSetNewTodo(todo);
     cleanTextField();
   }
 
   function cleanTextField() {
-    setNewTodo("");
+    setNewTodo('');
   }
 
   function handleInputFocus() {
@@ -45,23 +44,23 @@ export function Form({ handleSetNewTodo }: FormProps) {
         style={[
           styles.newTodo,
           {
-            borderColor: inputIsFocused ? theme.colors.blue : "transparent",
+            borderColor: inputIsFocused ? theme.colors.blue : 'transparent',
           },
         ]}
-        placeholder="Adicone uma nova tarfea"
-        placeholderTextColor="grey"
+        placeholder='Adicone uma nova tarfea'
+        placeholderTextColor='grey'
         onChangeText={setNewTodo}
         value={newTodo}
       />
-      <AddButton type="add" onPress={addNewTodo} />
+      <AddButton type='add' onPress={addNewTodo} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: -28,
   },
   newTodo: {

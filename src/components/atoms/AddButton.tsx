@@ -1,9 +1,10 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { theme } from "../../themes/default";
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+
+import { theme } from '../../themes/default';
 
 interface ButtonProps {
-  type: "add" | "remove";
+  type: 'add' | 'remove';
   onPress: () => void;
 }
 
@@ -20,13 +21,13 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: theme.colors.blueDark,
   },
   buttonTitle: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: theme.colors.gray100,
   },
 });
