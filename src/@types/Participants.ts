@@ -1,10 +1,7 @@
 export interface Todo {
   id: string;
   description: string;
+  checked: boolean;
 }
 
-export interface TodosList {
-  list: Todo[];
-  todosCreated: number;
-  todosCompleted: number;
-}
+export type TodosList = Todo[];
