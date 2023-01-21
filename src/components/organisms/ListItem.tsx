@@ -24,13 +24,32 @@ export function ListItem({ todo }: ListItemProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: checked
+            ? theme.colors.gray500
+            : theme.colors.gray400,
+        },
+      ]}
+    >
       <SelectionButton
         onPress={handleOnPressSelectionButton}
         itemChecked={checked}
       />
-      <View style={styles.nameDisplayContainer}>
-        <Text style={styles.nameDisplay}>{description}</Text>
+      <View style={styles.descriptionContainer}>
+        <Text
+          style={[
+            styles.descriptionText,
+            {
+              textDecorationLine: checked ? 'line-through' : 'none',
+              color: checked ? theme.colors.gray300 : theme.colors.gray100,
+            },
+          ]}
+        >
+          {description}
+        </Text>
       </View>
       <DeleteButton onPress={handleOnPressDelete} />
     </View>
@@ -44,18 +63,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: theme.colors.gray500,
     borderRadius: 5,
     borderColor: theme.colors.gray400,
     borderWidth: 1,
   },
-  nameDisplayContainer: {
+  descriptionContainer: {
     flex: 1,
     marginRight: 13,
     justifyContent: 'center',
     padding: 8,
   },
-  nameDisplay: {
+  descriptionText: {
     fontSize: 16,
     fontWeight: '600',
     color: 'white',

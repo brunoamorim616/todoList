@@ -8,6 +8,7 @@ interface TodoContextType {
   handleRemoveTodoByID: (todoID: string) => void;
   handleCheckTodo: (todoID: string) => void;
   todosChecked: number;
+  todosCreated: number;
 }
 
 interface TodosProviderProps {
@@ -51,6 +52,10 @@ export function TodosProvider({ children }: TodosProviderProps) {
     return countCheckedTodos;
   }, [todosList]);
 
+  const todosCreated = useMemo(() => {
+    return todosList.length;
+  }, [todosList]);
+
   return (
     <TodosContext.Provider
       value={{
@@ -59,6 +64,7 @@ export function TodosProvider({ children }: TodosProviderProps) {
         handleRemoveTodoByID,
         handleSetNewTodo,
         todosChecked,
+        todosCreated,
       }}
     >
       {children}
