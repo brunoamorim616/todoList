@@ -4,11 +4,10 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { theme } from '../../themes/default';
 
 interface ButtonProps {
-  type: 'add' | 'remove';
   onPress: () => void;
 }
 
-export function AddButton({ type, onPress }: ButtonProps) {
+export function AddButton({ onPress }: ButtonProps) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
       <Text style={styles.buttonTitle}>+</Text>
