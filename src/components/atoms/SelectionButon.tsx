@@ -21,7 +21,7 @@ export function SelectionButton({ onPress, itemChecked }: ButtonProps) {
               : theme.colors.transparent,
             borderColor: itemChecked
               ? theme.colors.purpleDark
-              : theme.colors.gray100,
+              : theme.colors.blue,
           },
         ]}
       >
